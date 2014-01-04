@@ -58,7 +58,7 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel, SchemeLast }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeUrg, SchemeLast }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
@@ -188,6 +188,7 @@ static void pop(Client *);
 static void propertynotify(XEvent *e);
 static void quit(const Arg *arg);
 static Monitor *recttomon(int x, int y, int w, int h);
+static void reexec(const Arg *arg);
 static void resize(Client *c, int x, int y, int w, int h, Bool interact);
 static void resizeclient(Client *c, int x, int y, int w, int h);
 static void resizemouse(const Arg *arg);
@@ -234,7 +235,7 @@ static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
 
 /* variables */
-static const char broken[] = "broken";
+static const char broken[] = "[untitled]";
 static char stext[256];
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
@@ -705,6 +706,8 @@ drawbar(Monitor *m) {
 	for(i = 0; i < LENGTH(tags); i++) {
 		w = TEXTW(tags[i]);
 		drw_setscheme(drw, m->tagset[m->seltags] & 1 << i ? &scheme[SchemeSel] : &scheme[SchemeNorm]);
+		if(urg & 1 << i)
+			drw_setscheme(drw, &scheme[SchemeUrg]);
 		drw_text(drw, x, 0, w, bh, tags[i], urg & 1 << i);
 		drw_rect(drw, x, 0, w, bh, m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
 		           occ & 1 << i, urg & 1 << i);
@@ -1234,6 +1237,10 @@ quit(const Arg *arg) {
 	running = False;
 }
 
+void reexec(const Arg *arg) {
+	execlp("dwm", "dwm", NULL);
+}
+
 Monitor *
 recttomon(int x, int y, int w, int h) {
 	Monitor *m, *r = selmon;
@@ -1537,6 +1544,9 @@ setup(void) {
 	scheme[SchemeSel].border = drw_clr_create(drw, selbordercolor);
 	scheme[SchemeSel].bg = drw_clr_create(drw, selbgcolor);
 	scheme[SchemeSel].fg = drw_clr_create(drw, selfgcolor);
+	scheme[SchemeUrg].border = drw_clr_create(drw, urgbordercolor);
+	scheme[SchemeUrg].bg = drw_clr_create(drw, urgbgcolor);
+	scheme[SchemeUrg].fg = drw_clr_create(drw, urgfgcolor);
 	/* init bars */
 	updatebars();
 	updatestatus();

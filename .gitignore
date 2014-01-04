@@ -1,0 +1,7 @@
+dwm
+dwm.o
+dwm_patches
+cscope.out
+tags
+drw.o
+util.o
