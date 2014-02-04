@@ -60,7 +60,6 @@ static const char term[] = "urxvtc";
 static const char *termcmd[]  = { term, NULL };
 
 static const char *sudocmd[]  = { term, "-e", "sudo", "-i", NULL };
-static const char *warpcmd[]  = { "xwarppointer", "abspos", "0", "768", NULL };
 static const char *lockcmd[]  = { "xlock", "-mode", "space", NULL };
 
 static const char *cmusprev[]  = { "cmus-remote", "-r", NULL };
@@ -80,7 +79,7 @@ static Key keys[] = {
 	{ 0,                            XK_Menu,   spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_s,      spawn,          {.v = sudocmd } },
-	{ MODKEY,                       XK_w,      spawn,          {.v = warpcmd } },
+	{ MODKEY,                       XK_w,      hideMouse,      {0} },
 
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
