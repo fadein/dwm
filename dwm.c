@@ -174,6 +174,7 @@ static long getstate(Window w);
 static Bool gettextprop(Window w, Atom atom, char *text, unsigned int size);
 static void grabbuttons(Client *c, Bool focused);
 static void grabkeys(void);
+static void hideMouse(const Arg *arg);
 static void incnmaster(const Arg *arg);
 static void keypress(XEvent *e);
 static void killclient(const Arg *arg);
@@ -955,6 +956,11 @@ grabkeys(void) {
 					XGrabKey(dpy, code, keys[i].mod | modifiers[j], root,
 						 True, GrabModeAsync, GrabModeAsync);
 	}
+}
+
+void
+hideMouse(const Arg *arg) {
+	XWarpPointer(dpy, None, root, 0, 0, 0, 0, 0, 768);
 }
 
 void
