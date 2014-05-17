@@ -22,17 +22,33 @@ static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6" };
 
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
+	/* graphics */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            True,        -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 3,       False,       -1 },
-	{ "Xombrero", NULL,       NULL,       1 << 3,       False,       -1 },
+	{ "Inkscape", NULL,       NULL,       1 << 2,       False,       -1 },
+
+	/* browsers */
+	/* class      instance    title       tags mask     isfloating   monitor */
+	{ "Firefox",  NULL,       NULL,       1 << 5,       False,       -1 },
+	{ "Xombrero", NULL,       NULL,       1 << 5,       False,       -1 },
+
+	/* Weka windows float on workspace 3 */
+	/* class                 instance                  title                             tags mask     isfloating   monitor */
+	{ "weka-gui-GUIChooser", "sun-awt-X11-XFramePeer", "Weka KnowledgeFlow Environment", 1 << 2,       True,        -1 },
+	{ "weka-gui-GUIChooser", "sun-awt-X11-XFramePeer", "SimpleCLI"                     , 1 << 2,       True,        -1 },
+	{ "weka-gui-GUIChooser", "sun-awt-X11-XFramePeer", "Weka Experiment Environment"   , 1 << 2,       True,        -1 },
+	{ "weka-gui-GUIChooser", "sun-awt-X11-XFramePeer", "Weka Explorer"                 , 1 << 2,       True,        -1 },
+	{ "weka-gui-GUIChooser", "sun-awt-X11-XFramePeer", "Weka GUI Chooser"              , 1 << 2,       True,        -1 },
+	{ "weka-gui-GUIChooser", "sun-awt-X11-XFramePeer", "Weka GUI Chooser"              , 1 << 2,       True,        -1 },
+	{ "URxvt",               "urxvt",                  "[voyager]  java -jar weka.jar" , 1 << 2,       False,        -1 },
+
 };
 
 /* layout(s) */
@@ -111,8 +127,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_1,                      1)
 	TAGKEYS(                        XK_2,                      2)
 	TAGKEYS(                        XK_3,                      3)
-	//TAGKEYS(                        XK_4,                      4)
-	//TAGKEYS(                        XK_5,                      5)
+	TAGKEYS(                        XK_4,                      4)
+	TAGKEYS(                        XK_5,                      5)
 	//TAGKEYS(                        XK_6,                      6)
 	//TAGKEYS(                        XK_7,                      7)
 	//TAGKEYS(                        XK_8,                      8)
