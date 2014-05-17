@@ -79,6 +79,7 @@ static const char *termcmd[]  = { term, NULL };
 
 static const char *sudocmd[]  = { term, "-e", "sudo", "-i", NULL };
 static const char *lockcmd[]  = { "xlock", "-mode", "space", NULL };
+static const char *killcmd[]  = { "xkill", NULL };
 
 static const char *cmusprev[]  = { "cmus-remote", "-r", NULL };
 static const char *cmusplay[]  = { "cmus-remote", "-p", NULL };
@@ -134,6 +135,8 @@ static Key keys[] = {
 	//TAGKEYS(                        XK_8,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY,                       XK_q,      reexec,         {0} },
+
+	{ MODKEY|ControlMask|ShiftMask, XK_k,      spawn,          {.v = killcmd } },
 	{ MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },
 };
 
