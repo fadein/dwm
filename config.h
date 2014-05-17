@@ -2,12 +2,14 @@
 
 /* appearance */
 static const char font[]            = "-misc-dejavu sans mono-medium-r-normal--0-0-0-0-m-0-iso8859-1";
+
 static const char normbordercolor[] = "#006675";
 static const char normbgcolor[]     = "#121015";
-static const char normfgcolor[]     = "#d3d7cf";
+//static const char normfgcolor[]     = "#1387cf";  // this color is too dim...
+static const char normfgcolor[]     = "#00ddec";
 
 static const char selbordercolor[]  = "#00ddec";
-static const char selbgcolor[]      = "#f5f5f5";
+static const char selbgcolor[]      = "#00ddec";
 static const char selfgcolor[]      = "#2e3436";
 
 static const char urgbordercolor[]  = "#ff0000";
