@@ -3,20 +3,20 @@
 /* appearance */
 static const char font[]            = "-misc-dejavu sans mono-medium-r-normal--0-0-0-0-m-0-iso8859-1";
 
-static const char normbordercolor[] = "#006675";
-static const char normbgcolor[]     = "#121015";
-//static const char normfgcolor[]     = "#1387cf";  // this color is too dim...
-static const char normfgcolor[]     = "#00ddec";
+static const char normbordercolor[] = "#00aa20";
+static const char selbordercolor[]  = "#00cf2c";
 
-static const char selbordercolor[]  = "#00ddec";
-static const char selbgcolor[]      = "#00ddec";
-static const char selfgcolor[]      = "#2e3436";
+static const char normfgcolor[]     = "#ffffff";
+static const char normbgcolor[]     = "#00aa20";
+
+static const char selfgcolor[]      = "#ffffff";
+static const char selbgcolor[]      = "#00cf2c";
 
 static const char urgbordercolor[]  = "#ff0000";
 static const char urgbgcolor[]      = "#ffffff";
 static const char urgfgcolor[]      = "#ff0000";
 
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 6;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
@@ -73,13 +73,15 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, "-p", "cmd>" , NULL };
 static const char term[] = "urxvtc";
 static const char *termcmd[]  = { term, NULL };
 
-static const char *sudocmd[]  = { term, "-e", "sudo", "-i", NULL };
-static const char *lockcmd[]  = { "xlock", "-mode", "space", NULL };
-static const char *killcmd[]  = { "xkill", NULL };
+static const char *sudocmd[]     = { term, "-e", "sudo", "-i", NULL };
+static const char *lockcmd[]     = { "xlock", "-mode", "space", NULL };
+static const char *killcmd[]     = { "xkill", NULL };
+static const char *batterycmd[]  = { "pkill", "-SIGUSR1", "dwm_statusbar", NULL };
+static const char *loadavecmd[]  = { "pkill", "-SIGUSR2", "dwm_statusbar", NULL };
 
 static const char *cmusprev[]  = { "cmus-remote", "-r", NULL };
 static const char *cmusplay[]  = { "cmus-remote", "-p", NULL };
@@ -135,6 +137,9 @@ static Key keys[] = {
 	//TAGKEYS(                        XK_8,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY,                       XK_q,      reexec,         {0} },
+
+	{ MODKEY,                       XK_a,      spawn,          {.v = batterycmd } },
+	{ MODKEY|ShiftMask,             XK_a,      spawn,          {.v = loadavecmd } },
 
 	{ MODKEY|ControlMask|ShiftMask, XK_k,      spawn,          {.v = killcmd } },
 	{ MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },
