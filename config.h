@@ -1,9 +1,22 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]            = "-misc-dejavu sans mono-medium-r-normal--0-0-0-0-m-0-iso8859-1";
+//static const char font[]            = "-misc-dejavu sans mono-medium-r-normal--0-0-0-0-m-0-iso8859-1";
 
-static const char normbordercolor[] = "#00aa20";
+// Luxi Sans
+//static const char font[]            = "-*-luxi sans-*-r-*-*-*-*-*-*-*-*-*-*";
+
+// Droid Sans Mono
+//static const char font[]            = "-*-droid sans mono-*-*-*-*-*-*-*-*-*-*-*-*";
+
+// Droid Sans
+//static const char font[]            = "-*-droid sans-medium-*-*-*-*-*-*-*-*-*-*-*";
+
+// Ubuntu Sans
+static const char font[]            = "-*-ubuntu-medium-r-*-*-*-*-*-*-*-*-*-*";
+
+
+static const char normbordercolor[] = "#008a20";
 static const char selbordercolor[]  = "#00cf2c";
 
 static const char normfgcolor[]     = "#ffffff";
