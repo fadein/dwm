@@ -1103,7 +1103,7 @@ maprequest(XEvent *e) {
 
 void
 monocle(Monitor *m) {
-	unsigned int n = 0;
+	unsigned int n = 0, r = 0;
 	Client *c;
 
 	for(c = m->clients; c; c = c->next)
@@ -1111,8 +1111,18 @@ monocle(Monitor *m) {
 			n++;
 	if(n > 0) /* override layout symbol */
 		snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n);
-	for(c = nexttiled(m->clients); c; c = nexttiled(c->next))
-		resize(c, m->wx - c->bw, m->wy, m->ww, m->wh, False);
+	for(c = nexttiled(m->clients); c; c = nexttiled(c->next)) {
+		/* remove border when in monocle layout */
+		if(c->bw) {
+			c->oldbw = c->bw;
+			c->bw = 0;
+			r = 1;
+		}
+		if(r)
+			resizeclient(c, m->wx, m->wy, m->ww - (2 * c->bw), m->wh - (2 * c->bw));
+		else
+			resize(c, m->wx, m->wy, m->ww - (2 * c->bw), m->wh - (2 * c->bw), False);
+	}
 }
 
 void
@@ -1627,7 +1637,7 @@ tag(const Arg *arg) {
 
 void
 tile(Monitor *m) {
-	unsigned int i, n, h, mw, my, ty;
+	unsigned int i, n, h, mw, my, ty, r;
 	Client *c;
 
 	for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
@@ -1638,20 +1648,37 @@ tile(Monitor *m) {
 		mw = m->nmaster ? m->ww * m->mfact : 0;
 	else
 		mw = m->ww;
-	for(i = my = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+	for(i = my = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++, r = 0) {
+		if(n == 1) {
+			if (c->bw) {
+				/* remove border when only one window is on the current tag */
+				c->oldbw = c->bw;
+				c->bw = 0;
+				r = 1;
+			}
+		}
+		else if(!c->bw && c->oldbw) {
+			/* restore border when more than one window is displayed */
+			c->bw = c->oldbw;
+			c->oldbw = 0;
+			r = 1;
+		}
+
 		if(i < m->nmaster) {
 			h = (m->wh - my) / (MIN(n, m->nmaster) - i);
-			if(n == 1)
-				resize(c, m->wx - c->bw, m->wy, m->ww, m->wh, False);
+			if(r)
+				resizeclient(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw));
 			else
-				resize(c, m->wx - c->bw, m->wy + my, mw - c->bw, h - c->bw, False);
-			my += HEIGHT(c) - c->bw;
+				//resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), False); //6.1 single-window-no-borders
+				resize(c, m->wx - c->bw, m->wy + my, mw - c->bw, h - c->bw, False); // 6.0 singular borders
+			my += HEIGHT(c);
 		}
 		else {
 			h = (m->wh - ty) / (n - i);
 			resize(c, m->wx + mw - c->bw, m->wy + ty, m->ww - mw, h - c->bw, False);
 			ty += HEIGHT(c) - c->bw;
 		}
+	}
 }
 
 void
