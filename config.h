@@ -95,6 +95,8 @@ static const char *lockcmd[]     = { "xlock", "-mode", "space", NULL };
 static const char *killcmd[]     = { "xkill", NULL };
 static const char *batterycmd[]  = { "pkill", "-SIGUSR1", "dwm_statusbar", NULL };
 static const char *loadavecmd[]  = { "pkill", "-SIGUSR2", "dwm_statusbar", NULL };
+static const char *nextwall[]    = { "/home/fadein/.wallpapers/cycle/next-wallpaper.sh", NULL };
+static const char *prevwall[]    = { "/home/fadein/.wallpapers/cycle/next-wallpaper.sh", "-p", NULL };
 
 static const char *cmusprev[]  = { "cmus-remote", "-r", NULL };
 static const char *cmusplay[]  = { "cmus-remote", "-p", NULL };
@@ -113,7 +115,11 @@ static Key keys[] = {
 	{ MODKEY,                       XK_b,      spawn,          {.v = cmusnext } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ 0,                            XK_Menu,   spawn,          {.v = dmenucmd } },
+
+	{ MODKEY,                       XK_period, spawn,           {.v = nextwall } },
+	{ MODKEY,                       XK_comma,  spawn,           {.v = prevwall } },
 	{ MODKEY|ShiftMask,             XK_Return, cycletermcolors, {0} },
+
 	{ MODKEY,                       XK_s,      spawn,          {.v = sudocmd } },
 	{ MODKEY,                       XK_w,      hideMouse,      {0} },
 
