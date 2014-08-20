@@ -88,9 +88,9 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, "-p", "cmd>" , NULL };
 static const char term[] = "urxvtc";
-static const char *termcmd[]  = { term, NULL };
+static const char *termcmd[]  = { term, "-sh", "50", "-tint", "white", NULL };
 
-static const char *sudocmd[]     = { term, "-e", "sudo", "-i", NULL };
+static const char *sudocmd[]     = { term, "-sh", "50", "-tint", "red", "-e", "sudo", "-i", NULL };
 static const char *lockcmd[]     = { "xlock", "-mode", "space", NULL };
 static const char *killcmd[]     = { "xkill", NULL };
 static const char *batterycmd[]  = { "pkill", "-SIGUSR1", "dwm_statusbar", NULL };
@@ -102,6 +102,8 @@ static const char *cmuspause[] = { "cmus-remote", "-u", NULL };
 static const char *cmusstop[]  = { "cmus-remote", "-s", NULL };
 static const char *cmusnext[]  = { "cmus-remote", "-n", NULL };
 
+#include "cycletermcolors.c"
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_z,      spawn,          {.v = cmusprev } },
@@ -111,7 +113,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_b,      spawn,          {.v = cmusnext } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ 0,                            XK_Menu,   spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_Return, cycletermcolors, {0} },
 	{ MODKEY,                       XK_s,      spawn,          {.v = sudocmd } },
 	{ MODKEY,                       XK_w,      hideMouse,      {0} },
 
