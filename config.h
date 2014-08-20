@@ -16,20 +16,20 @@
 static const char font[]            = "-*-ubuntu-medium-r-*-*-*-*-*-*-*-*-*-*";
 
 
-static const char normbordercolor[] = "#008a20";
-static const char selbordercolor[]  = "#00cf2c";
+static const char normbordercolor[] = "#393939";
+static const char selbordercolor[]  = "#cfcfcf";
 
-static const char normfgcolor[]     = "#ffffff";
-static const char normbgcolor[]     = "#00aa20";
+static const char normfgcolor[]     = "#dfdfdf";
+static const char normbgcolor[]     = "#595959";
 
-static const char selfgcolor[]      = "#ffffff";
-static const char selbgcolor[]      = "#00cf2c";
+static const char selfgcolor[]      = "#dfdfdf";
+static const char selbgcolor[]      = "#7f7f7f";
 
 static const char urgbordercolor[]  = "#ff0000";
 static const char urgbgcolor[]      = "#ffffff";
 static const char urgfgcolor[]      = "#ff0000";
 
-static const unsigned int borderpx  = 6;        /* border pixel of windows */
+static const unsigned int borderpx  = 4;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
@@ -72,7 +72,7 @@ static const Bool resizehints = True; /* True means respect size hints in tiled 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[M]",      monocle },    /* first entry is default */
-	{ "[]=",      tile },    /* no layout function means floating behavior */
+	{ "[]=",      tile },       /* no layout function means floating behavior */
 	{ "><>",      NULL },
 };
 
@@ -93,8 +93,10 @@ static const char *termcmd[]  = { term, "-sh", "50", "-tint", "white", NULL };
 static const char *sudocmd[]     = { term, "-sh", "50", "-tint", "red", "-e", "sudo", "-i", NULL };
 static const char *lockcmd[]     = { "xlock", "-mode", "space", NULL };
 static const char *killcmd[]     = { "xkill", NULL };
+
 static const char *batterycmd[]  = { "pkill", "-SIGUSR1", "dwm_statusbar", NULL };
 static const char *loadavecmd[]  = { "pkill", "-SIGUSR2", "dwm_statusbar", NULL };
+
 static const char *nextwall[]    = { "/home/fadein/.wallpapers/cycle/next-wallpaper.sh", NULL };
 static const char *prevwall[]    = { "/home/fadein/.wallpapers/cycle/next-wallpaper.sh", "-p", NULL };
 
