@@ -120,7 +120,6 @@ static Key keys[] = {
 
 	{ MODKEY,                       XK_period, spawn,           {.v = nextwall } },
 	{ MODKEY,                       XK_comma,  spawn,           {.v = prevwall } },
-	{ MODKEY|ShiftMask,             XK_Return, cycletermcolors, {0} },
 	{ MODKEY|ShiftMask,             XK_Return, randomtermcolors, {0} },
 
 	{ MODKEY,                       XK_s,      spawn,          {.v = sudocmd } },
