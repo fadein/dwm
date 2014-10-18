@@ -49,12 +49,14 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            True,        -1 },
 	{ "Inkscape", NULL,       NULL,       1 << 2,       False,       -1 },
+	{ "MPlayer",          "xv",       "MPlayer",       0,            True,        -1 },
+	{ "Display",          "display",  NULL,            0,            True,        -1 },
+	{ "feh",              NULL,       NULL,            0,            True,        -1 },
 
 	/* browsers */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Firefox",  NULL,       NULL,       1 << 5,       False,       -1 },
 	{ "Xombrero", NULL,       NULL,       1 << 5,       False,       -1 },
-
 };
 
 /* layout(s) */
