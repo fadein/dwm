@@ -46,6 +46,9 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            True,        -1 },
 	{ "Inkscape", NULL,       NULL,       1 << 2,       False,       -1 },
+	{ "MPlayer",          "xv",       "MPlayer",       0,            True,        -1 },
+	{ "Display",          "display",  NULL,            0,            True,        -1 },
+	{ "feh",              NULL,       NULL,            0,            True,        -1 },
 
 	/* browsers */
 	/* class      instance    title       tags mask     isfloating   monitor */
@@ -61,7 +64,6 @@ static const Rule rules[] = {
 	{ "weka-gui-GUIChooser", "sun-awt-X11-XFramePeer", "Weka GUI Chooser"              , 1 << 2,       True,        -1 },
 	{ "weka-gui-GUIChooser", "sun-awt-X11-XFramePeer", "Weka GUI Chooser"              , 1 << 2,       True,        -1 },
 	{ "URxvt",               "urxvt",                  "[voyager]  java -jar weka.jar" , 1 << 2,       False,        -1 },
-
 };
 
 /* layout(s) */
