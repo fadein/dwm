@@ -1,21 +1,31 @@
 /* terminal colors */
+/* https://en.wikipedia.org/wiki/List_of_colors */
 static const char* termcolors[] = {
-    "grey21",               //neutral
-    "darkorange2",          //warm  - orange
+    "grey50",               //neutral
+    "grey31",               //neutral
+    "slategray",            //neutral
+	"#36454F",              //neutral (charcoal)
+	"#98817B",              //neutral (cinereous)
     "blue",                 //cool  - blue
-    "gold4",                //warm  - yellow
-    "darkgreen",            //cool  - green
-    "chocolate4",           //warm  - brown
     "darkcyan",             //cool  - blue
-    "yellow4",              //warm  - yellow
-    "seagreen",             //cool  - green
-    "sienna4",              //warm  - brown
     "midnightblue",         //cool  - blue
-    "maroon",               //warm  - purple
-    "forestgreen",          //cool  - green
     "blueviolet",           //cool  - blue
-    "darkkhaki",            //warm  - brown
+    "cadetblue",            //cool  - blue
+	"#2a52be"               //cool  - blue (cerulean)
+    "maroon",               //warm  - purple
     "orchid",               //cool  - purple
+	"#4B0082",              //cool  - purple (indigo)
+	"#703642",              //cool  - purple (catawba)
+    "chocolate4",           //warm  - brown
+    "darkkhaki",            //warm  - brown
+    "darkorange2",          //warm  - orange
+    "darkgreen",            //cool  - green
+    "seagreen",             //cool  - green
+    "forestgreen",          //cool  - green
+    "chartreuse",           //cool  - green
+	"#78866B",              //cool  - green (camoflage green)
+    "gold4",                //warm  - yellow
+    "yellow4",              //warm  - yellow
 };
 
 /* Cycle through the colors in order */
