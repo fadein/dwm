@@ -16,8 +16,8 @@
 static const char font[]            = "-*-ubuntu-medium-r-*-*-*-*-*-*-*-*-*-*";
 
 
-static const char normbordercolor[] = "#393939";
-static const char selbordercolor[]  = "#cfcfcf";
+static const char normbordercolor[] = "#7f7f7f";
+static const char selbordercolor[]  = "#393939";
 
 static const char normfgcolor[]     = "#dfdfdf";
 static const char normbgcolor[]     = "#595959";
