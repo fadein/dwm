@@ -16,8 +16,8 @@
 static const char font[]            = "-*-ubuntu-medium-r-*-*-*-*-*-*-*-*-*-*";
 
 
-static const char normbordercolor[] = "#393939";
-static const char selbordercolor[]  = "#cfcfcf";
+static const char normbordercolor[] = "#7f7f7f";
+static const char selbordercolor[]  = "#393939";
 
 static const char normfgcolor[]     = "#dfdfdf";
 static const char normbgcolor[]     = "#595959";
@@ -35,7 +35,10 @@ static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6" };
+static const char *tags[] = { "1", "2", "3",
+	"4", "5", "6"
+	//"r", "g", "b", "c", "m", "y"
+};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -54,16 +57,6 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Firefox",  NULL,       NULL,       1 << 5,       False,       -1 },
 	{ "Xombrero", NULL,       NULL,       1 << 5,       False,       -1 },
-
-	/* Weka windows float on workspace 3 */
-	/* class                 instance                  title                             tags mask     isfloating   monitor */
-	{ "weka-gui-GUIChooser", "sun-awt-X11-XFramePeer", "Weka KnowledgeFlow Environment", 1 << 2,       True,        -1 },
-	{ "weka-gui-GUIChooser", "sun-awt-X11-XFramePeer", "SimpleCLI"                     , 1 << 2,       True,        -1 },
-	{ "weka-gui-GUIChooser", "sun-awt-X11-XFramePeer", "Weka Experiment Environment"   , 1 << 2,       True,        -1 },
-	{ "weka-gui-GUIChooser", "sun-awt-X11-XFramePeer", "Weka Explorer"                 , 1 << 2,       True,        -1 },
-	{ "weka-gui-GUIChooser", "sun-awt-X11-XFramePeer", "Weka GUI Chooser"              , 1 << 2,       True,        -1 },
-	{ "weka-gui-GUIChooser", "sun-awt-X11-XFramePeer", "Weka GUI Chooser"              , 1 << 2,       True,        -1 },
-	{ "URxvt",               "urxvt",                  "[voyager]  java -jar weka.jar" , 1 << 2,       False,        -1 },
 };
 
 /* layout(s) */
@@ -71,20 +64,15 @@ static const float mfact      = 0.50; /* factor of master area size [0.05..0.95]
 static const int nmaster      = 1;    /* number of clients in master area */
 static const Bool resizehints = True; /* True means respect size hints in tiled resizals */
 
+#include "gaplessgrid.c"
+
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[M]",      monocle },    /* first entry is default */
 	{ "[]=",      tile },       /* no layout function means floating behavior */
 	{ "><>",      NULL },
+	{ "###",      gaplessgrid },
 };
-
-/* key definitions */
-#define MODKEY Mod4Mask
-#define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
@@ -110,6 +98,14 @@ static const char *cmusnext[]  = { "cmus-remote", "-n", NULL };
 
 #include "cycletermcolors.c"
 
+/* key definitions */
+#define MODKEY Mod4Mask
+#define TAGKEYS(KEY,TAG) \
+	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_z,      spawn,          {.v = cmusprev } },
@@ -122,7 +118,6 @@ static Key keys[] = {
 
 	{ MODKEY,                       XK_period, spawn,           {.v = nextwall } },
 	{ MODKEY,                       XK_comma,  spawn,           {.v = prevwall } },
-	{ MODKEY|ShiftMask,             XK_Return, cycletermcolors, {0} },
 	{ MODKEY|ShiftMask,             XK_Return, randomtermcolors, {0} },
 
 	{ MODKEY,                       XK_s,      spawn,          {.v = sudocmd } },
@@ -143,6 +138,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
@@ -158,9 +154,9 @@ static Key keys[] = {
 	TAGKEYS(                        XK_3,                      3)
 	TAGKEYS(                        XK_4,                      4)
 	TAGKEYS(                        XK_5,                      5)
-	//TAGKEYS(                        XK_6,                      6)
-	//TAGKEYS(                        XK_7,                      7)
-	//TAGKEYS(                        XK_8,                      8)
+	// TAGKEYS(                        XK_6,                      6)
+	// TAGKEYS(                        XK_7,                      7)
+	// TAGKEYS(                        XK_8,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY,                       XK_q,      reexec,         {0} },
 
