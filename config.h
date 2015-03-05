@@ -57,6 +57,9 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Firefox",  NULL,       NULL,       1 << 5,       False,       -1 },
 	{ "Xombrero", NULL,       NULL,       1 << 5,       False,       -1 },
+
+	/* terminology - another presentation-specific config */
+	{ "terminology", NULL,       NULL,       1 << 3,       False,       -1 },
 };
 
 /* layout(s) */
@@ -86,6 +89,10 @@ static const char *killcmd[]     = { "xkill", NULL };
 
 static const char *batterycmd[]  = { "pkill", "-SIGUSR1", "dwm_statusbar", NULL };
 static const char *loadavecmd[]  = { "pkill", "-SIGUSR2", "dwm_statusbar", NULL };
+
+static const char *coloncmd[]  = { "pkill", "-SIGHUP",   "dwm_statusbar", NULL };
+static const char *minuscmd[]  = { "pkill", "-SIGQUIT",   "dwm_statusbar", NULL };
+static const char *gravecmd[]  = { "pkill", "-SIGWINCH", "dwm_statusbar", NULL };
 
 static const char *nextwall[]    = { "/home/fadein/.wallpapers/cycle/next-wallpaper.sh", NULL };
 static const char *prevwall[]    = { "/home/fadein/.wallpapers/cycle/next-wallpaper.sh", "-p", NULL };
@@ -162,6 +169,10 @@ static Key keys[] = {
 
 	{ MODKEY,                       XK_a,      spawn,          {.v = batterycmd } },
 	{ MODKEY|ShiftMask,             XK_a,      spawn,          {.v = loadavecmd } },
+
+	{ MODKEY,                       XK_colon,  spawn,          {.v = coloncmd } },
+	{ MODKEY,                       XK_minus,  spawn,          {.v = minuscmd } },
+	{ MODKEY,                       XK_grave,  spawn,          {.v = gravecmd } },
 
 	{ MODKEY|ControlMask|ShiftMask, XK_k,      spawn,          {.v = killcmd } },
 	{ MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },
