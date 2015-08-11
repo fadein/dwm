@@ -86,7 +86,7 @@ static const char term[] = "urxvtc";
 static const char *termcmd[]  = { term, "-sh", "50", "-tint", "white", NULL };
 
 static const char *sudocmd[]     = { term, "-sh", "50", "-tint", "red", "-e", "sudo", "-i", NULL };
-static const char *lockcmd[]     = { "xlock", "-mode", "space", NULL };
+static const char *lockcmd[]     = { "slock", NULL };
 static const char *killcmd[]     = { "xkill", NULL };
 
 static const char *batterycmd[]  = { "pkill", "-SIGUSR1", "dwm_statusbar", NULL };
