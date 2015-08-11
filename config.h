@@ -170,7 +170,7 @@ static Key keys[] = {
 	// TAGKEYS(                        XK_7,                      7)
 	// TAGKEYS(                        XK_8,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ MODKEY,                       XK_q,      reexec,         {0} },
+	{ MODKEY|ControlMask|ShiftMask, XK_q,      reexec,         {0} },
 
 	{ MODKEY,                       XK_a,      spawn,          {.v = batterycmd } },
 	{ MODKEY|ShiftMask,             XK_a,      spawn,          {.v = loadavecmd } },
