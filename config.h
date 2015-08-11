@@ -93,8 +93,10 @@ static const char *batterycmd[]  = { "pkill", "-SIGUSR1", "dwm_statusbar", NULL 
 static const char *loadavecmd[]  = { "pkill", "-SIGUSR2", "dwm_statusbar", NULL };
 
 static const char *coloncmd[]  = { "pkill", "-SIGHUP",   "dwm_statusbar", NULL };
-static const char *minuscmd[]  = { "pkill", "-SIGQUIT",   "dwm_statusbar", NULL };
+static const char *minuscmd[]  = { "pkill", "-SIGQUIT",  "dwm_statusbar", NULL };
 static const char *gravecmd[]  = { "pkill", "-SIGWINCH", "dwm_statusbar", NULL };
+static const char *semiccmd[]  = { "pkill", "-SIGURG",   "dwm_statusbar", NULL };
+static const char *pluscmd[]   = { "pkill", "-SIGPOLL",  "dwm_statusbar", NULL };
 
 static const char *nextwall[]    = { "/home/fadein/.wallpapers/cycle/next-wallpaper.sh", NULL };
 static const char *prevwall[]    = { "/home/fadein/.wallpapers/cycle/next-wallpaper.sh", "-p", NULL };
@@ -173,9 +175,11 @@ static Key keys[] = {
 	{ MODKEY,                       XK_a,      spawn,          {.v = batterycmd } },
 	{ MODKEY|ShiftMask,             XK_a,      spawn,          {.v = loadavecmd } },
 
-	{ MODKEY,                       XK_colon,  spawn,          {.v = coloncmd } },
-	{ MODKEY,                       XK_minus,  spawn,          {.v = minuscmd } },
-	{ MODKEY,                       XK_grave,  spawn,          {.v = gravecmd } },
+	{ MODKEY|ShiftMask,             XK_equal,  spawn,          {.v = pluscmd  } }, // add one minute
+	{ MODKEY|ShiftMask,             XK_colon,  spawn,          {.v = semiccmd } }, // toggle pause/run
+	{ MODKEY,                       XK_colon,  spawn,          {.v = coloncmd } }, // toggle visibility of countdown timer
+	{ MODKEY,                       XK_grave,  spawn,          {.v = gravecmd } }, // reset sequence #1
+	{ MODKEY,                       XK_minus,  spawn,          {.v = minuscmd } }, // reset sequence #2 - reset timer to begining
 
 	{ MODKEY|ControlMask|ShiftMask, XK_k,      spawn,          {.v = killcmd } },
 	{ MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },
