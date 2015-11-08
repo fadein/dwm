@@ -92,12 +92,17 @@ randomtermcolors(const Arg *arg) {
         if(dpy)
             close(ConnectionNumber(dpy));
         setsid();
-        /* choose the color for the terminal and paste it in as the 2nd to last
-         * argument */
+        /* scan the arguments for they keyword "white"
+         * choose a random color for the terminal and paste it in 
+         * over the "REPLACE ME" argument */
 
         /* if we're sure that LENGTH(termcolors) == 16, we can throw out the % */
         /* termcmd[4] = termcolors[(r & 0xf) % LENGTH(termcolors)]; */
-        termcmd[4] = termcolors[n];
+        int i;
+        for (i = 0; termcmd[i]; ++i)
+            if (! strncmp("white", termcmd[i], 5))
+                break;
+        termcmd[i] = termcolors[n];
         execvp(termcmd[0], (char* const*)termcmd);
         fprintf(stderr, "dwm: execvp %s", termcmd[0]);
         perror(" failed");
