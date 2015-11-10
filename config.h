@@ -57,6 +57,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Firefox",  NULL,       NULL,       1 << 5,       False,       -1 },
 	{ "Xombrero", NULL,       NULL,       1 << 5,       False,       -1 },
+	{ "Vimb",     "vimb",     NULL,       1 << 5,       False,       -1 },
 
 	/* terminology - another presentation-specific config */
 	{ "terminology", NULL,       NULL,       1 << 3,       False,       -1 },
